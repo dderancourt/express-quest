@@ -132,6 +132,23 @@ app.delete("/api/delete/:id", (req, res) => {
   });
 });
 
+app.delete("/api/delete/:id", (req, res) => {
+  const idmovie = req.params.id;
+
+  connection.query(
+    "DELETE FROM tables_quest WHERE bool = false",
+    [idmovie],
+    err => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Erreur lors de la suppression d'un employé");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
 app.get("/api/:id", (req, res) => {
   const id = req.params.id;
   connection.query(
